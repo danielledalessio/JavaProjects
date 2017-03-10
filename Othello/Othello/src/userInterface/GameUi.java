@@ -4,61 +4,160 @@
  * and open the template in the editor.
  */
 package userInterface;
+import core.Constants;
+import core.Game;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Danielle D'Alessio
  */
-public class GameUi extends JPanel {
+public class GameUi extends JPanel 
+{
+    //set jlabels
     private JLabel nameOne;
     private JLabel nameTwo;
     private JLabel scoreOne;
     private JLabel scoreTwo;
+    private Game game;
     
-    public GameUi()
+    public GameUi(Game game)
     {
+        this.game = game;
         initComponents();
     }
     
-    //create dimensions, UI of game
     private void initComponents()
     {
+        //sizes and images
         this.setPreferredSize(new Dimension (50, 50));
         this.setMinimumSize(new Dimension (40, 40));
         this.setBackground(Color.LIGHT_GRAY);
         
-        nameOne = new JLabel("Danielle");
-        nameOne.setPreferredSize(new Dimension(100, 50));
-        nameOne.setBackground(Color.yellow);
-        nameOne.setMinimumSize(new Dimension(100, 50));
-        nameOne.setFont(new Font("arial", Font.BOLD, 22));
+        ImageIcon discOne = new ImageIcon(getClass().getResource("../images/blueCoin.png"));
+        discOne = imageResize(discOne);
+        ImageIcon discTwo = new ImageIcon(getClass().getResource("../images/redCoin.png"));
+        discTwo = imageResize(discTwo);
         
-        nameTwo = new JLabel("Josh");
-        nameTwo.setPreferredSize(new Dimension(100, 50));
-        nameTwo.setBackground(Color.LIGHT_GRAY);
-        nameTwo.setMinimumSize(new Dimension(100, 50));
-        nameTwo.setFont(new Font("arial", Font.BOLD, 22));
+        setNameOne(new JLabel());
+        getNameOne().setIcon(discOne);
+        getNameOne().setText(game.getPlayers().get(Constants.PLAYER_ONE).getName());
+        getNameOne().setPreferredSize(new Dimension(100, 50));
+        getNameOne().setBackground(Color.yellow);
+        getNameOne().setMinimumSize(new Dimension(100, 50));
+        getNameOne().setFont(new Font("arial", Font.BOLD, 22));
         
-        scoreOne = new JLabel("45");
-        scoreOne.setMinimumSize(new Dimension(100, 50));
-        scoreOne.setBackground(Color.LIGHT_GRAY);
-        scoreOne.setPreferredSize(new Dimension(100, 50));
-        scoreOne.setFont(new Font("arial", Font.BOLD, 22));
+        setNameTwo(new JLabel());
+        getNameTwo().setIcon(discTwo);
+        getNameTwo().setText(game.getPlayer().get(Constants.PLAYER_TWO).getName());
+        getNameTwo().setPreferredSize(new Dimension(100, 50));
+        getNameTwo().setBackground(Color.LIGHT_GRAY);
+        getNameTwo().setMinimumSize(new Dimension(100, 50));
+        getNameTwo().setFont(new Font("arial", Font.BOLD, 22));
         
-        scoreTwo = new JLabel("43");
-        scoreTwo.setMinimumSize(new Dimension(100, 50));
-        scoreTwo.setBackground(Color.LIGHT_GRAY);
-        scoreTwo.setPreferredSize(new Dimension(100, 50));
-        scoreTwo.setFont(new Font("arial", Font.BOLD, 22));
+        setScoreOne(new JLabel());
+        getScoreOne().setMinimumSize(new Dimension(100, 50));
+        getScoreOne().setBackground(Color.LIGHT_GRAY);
+        getScoreOne().setPreferredSize(new Dimension(100, 50));
+        getScoreOne().setFont(new Font("arial", Font.BOLD, 22));
+        
+        setScoreTwo(new JLabel());
+        getScoreTwo().setMinimumSize(new Dimension(100, 50));
+        getScoreTwo().setBackground(Color.LIGHT_GRAY);
+        getScoreTwo().setPreferredSize(new Dimension(100, 50));
+        getScoreTwo().setFont(new Font("arial", Font.BOLD, 22));
         
         
-        this.add(nameOne);
-        this.add(scoreOne);
-        this.add(nameTwo);
-        this.add(scoreTwo);
+        this.add(getNameOne());
+        this.add(getScoreOne());
+        this.add(getNameTwo());
+        this.add(getScoreTwo());
+    }
+
+    
+    private ImageIcon imageResize(ImageIcon icon)
+    {
+        //change image sizes
+        Image image = icon.getImage();
+        Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newImage);
+        return icon;
+    }
+    
+    
+    
+    /**
+     * @return the nameOne
+     */
+    public JLabel getNameOne() {
+        return nameOne;
+    }
+
+    /**
+     * @param nameOne the nameOne to set
+     */
+    public void setNameOne(JLabel nameOne) {
+        this.nameOne = nameOne;
+    }
+
+    /**
+     * @return the nameTwo
+     */
+    public JLabel getNameTwo() {
+        return nameTwo;
+    }
+
+    /**
+     * @param nameTwo the nameTwo to set
+     */
+    public void setNameTwo(JLabel nameTwo) {
+        this.nameTwo = nameTwo;
+    }
+
+    /**
+     * @return the scoreOne
+     */
+    public JLabel getScoreOne() {
+        return scoreOne;
+    }
+
+    /**
+     * @param scoreOne the scoreOne to set
+     */
+    public void setScoreOne(JLabel scoreOne) {
+        this.scoreOne = scoreOne;
+    }
+
+    /**
+     * @return the scoreTwo
+     */
+    public JLabel getScoreTwo() {
+        return scoreTwo;
+    }
+
+    /**
+     * @param scoreTwo the scoreTwo to set
+     */
+    public void setScoreTwo(JLabel scoreTwo) {
+        this.scoreTwo = scoreTwo;
+    }
+
+    /**
+     * @return the game
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    /**
+     * @param game the game to set
+     */
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

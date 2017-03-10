@@ -1,26 +1,29 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package othello;
 
-import core.Game;
-import userInterface.OthelloUi;
+import core.Game;//import game from core package
+import userInterface.OthelloUI;
 
 /**
  *
- * @author Danielle D'Alessio
+ * @author Josue Martinez
  */
-public class Othello 
-{
+public class Othello {
 
+   // private Game game;
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
-    {
-        Game game = new Game();
-        // when the UI is developed we will pass object game
-        // to the main UI class
-        OthelloUi othelloUi = new OthelloUi(game);
-        
-    }
     
+       
+    public static void main(String[] args) {
+        //get game to work
+     Game game = new Game();
+     
+     OthelloUI ui = new OthelloUI(game);
+    } 
 }

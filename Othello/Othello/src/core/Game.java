@@ -1,23 +1,22 @@
 /*
- * Karin Whiting
- * COP 3330 Object Oriented Programming
- * University of Central Florida
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package core;
 
-
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
-
+import java.util.ArrayList;
 /**
  *
- * @author kwhiting
+ * @author Danielle D'Alessio
  */
-public class Game 
-{
-    private ArrayList<Player> players;
+
+
+public class Game {
     private Board board;
+    private ArrayList<Player> players = new ArrayList<>();
+    private Player currentPlayer;
     
     public Game()
     {
@@ -26,40 +25,96 @@ public class Game
     
     private void initObjects()
     {
-        board = new Board();
+        setBoard(new Board());
+        
         createPlayers();
-        // temp function to prove objects were created properly
+        getBoard().setPlayers(getPlayers());
+        setCurrentPlayers(getPlayers().get(Constants.PLAYER_ONE));       
         printPlayers();
+        calculateScore();
     }
     
-    private void createPlayers()
+    public void createPlayers()
     {
-        players = new ArrayList<Player>();
-        
-        for(int i = 0; i < Constants.MAX_PLAYERS; i++)
+        //set players names
+        for(int i=0; i<Constants.MAX_PLAYERS;i++)
         {
-            String name = JOptionPane.showInputDialog(null, "Enter player's name");
-            Player player = new Player();
-            player.setName(name);
+            String strName = JOptionPane.showInputDialog(null, "Enter player's name");
             
-            if(i == Constants.PLAYER_ONE)
-                player.setDiscColor(Constants.DARK);
-            else if(i == Constants.PLAYER_TWO)
-                player.setDiscColor(Constants.LIGHT);
-            
-            players.add(player);
+                getPlayers().add(new Player());
+                getPlayers().get(i).setName(strName);
+                if(i == 0)
+                {
+                    getPlayers().get(i).setDiscolor(Constants.DARK);
+                }
+                else
+                {
+                    getPlayers().get(i).setDiscolor(Constants.LIGHT);
+                }
         }
     }
     
-    private void printPlayers()
+    
+    
+    public void printPlayers()
     {
         System.out.println("The game has the following players:");
         
-        for(Player player : getPlayers())
+        for(int i=0; i<Constants.MAX_PLAYERS; i++)
         {
-            System.out.println("Player " + player.getName() +
-                    " is playing disc color " + player.getDiscColor());
+           System.out.println("Player " + getPlayers().get(i).getName() + " is playing disc color " + getPlayers().get(i).getDiscolor());
         }
+        
+    }
+    
+    public void calculateScore()
+    {
+        board.calculateScore();   
+    }
+    
+    
+
+    /**
+     * @return the board
+     */
+    public Board getBoard() {
+        return board;
+    }
+
+    /**
+     * @param board the board to set
+     */
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    /**
+     * @return the player
+     */
+    public ArrayList<Player> getPlayer() {
+        return board.getPlayers();
+    }
+
+    /**
+     * @param player the player to set
+     */
+    public void setPlayer(ArrayList<Player> player) {
+        this.board.setPlayers(player);
+        
+    }
+
+    /**
+     * @return the currentPlayers
+     */
+    public Player getCurrentPlayers() {
+        return getCurrentPlayer();
+    }
+
+    /**
+     * @param currentPlayers the currentPlayers to set
+     */
+    public void setCurrentPlayers(Player currentPlayers) {
+        this.setCurrentPlayer(currentPlayers);
     }
 
     /**
@@ -77,16 +132,19 @@ public class Game
     }
 
     /**
-     * @return the board
+     * @return the currentPlayer
      */
-    public Board getBoard() {
-        return board;
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     /**
-     * @param board the board to set
+     * @param currentPlayer the currentPlayer to set
      */
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
+
+   
 }
+
